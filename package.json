@@ -1,0 +1,40 @@
+{
+  "name": "hassdb",
+  "version": "1.0.0",
+  "description": "Simple and minimal data storage for Home Assistant",
+  "main": "index.js",
+  "bin": "./bin/hassdb",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags"
+  },
+  "keywords": [
+    "home-assistant",
+    "database",
+    "data",
+    "storage",
+    "variables",
+    "persistent",
+    "session",
+    "hass",
+    "node.js",
+    "node",
+    "lowdb",
+    "lodash"
+  ],
+  "author": "Dale Higgs <dale3h@gmail.com> (http://dale3h.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.15.0",
+    "lowdb": "^0.13.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dale3h/hassdb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dale3h/hassdb/issues"
+  },
+  "homepage": "https://github.com/dale3h/hassdb#readme"
+}
