@@ -7,6 +7,7 @@ hassdb is a simple and minimal approach to persistent storage in Home Assistant.
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Examples](#examples)
 - [Contribution Guidelines](#contribution-guidelines)
 
 <!-- tocstop -->
@@ -28,6 +29,29 @@ hassdb 'key' 'value'
 To read a value:
 ```
 hassdb 'key'
+```
+
+## Examples
+
+### Store with Home Assistant
+
+Add this to your Home Assistant `configuration.yaml`:
+```yaml
+shell_command:
+  hassdb_set: 'hassdb "{{ key }}" "{{ value }}"'
+
+automation:
+  trigger:
+    ...
+  action:
+    - service: shell_command.hassdb_set
+      data_template:
+        key: light.living_room.state
+        value: "{{ states.light.living_room.state }}"
+    - service: shell_command.hassdb_set
+      data_template:
+        key: light.living_room.attributes
+        value: "{{ states.light.living_room.attributes }}"
 ```
 
 ## Contribution Guidelines
