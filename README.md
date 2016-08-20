@@ -19,6 +19,11 @@ To install hassdb, simply run:
 npm install -g hassdb
 ```
 
+If you receive a permissions error, try it again with `sudo`:
+```
+sudo npm install -g hassdb
+```
+
 ## Usage
 
 To store a value:
