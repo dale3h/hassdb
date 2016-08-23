@@ -4,6 +4,7 @@
 
 var fs = require('fs')
 var path = require('path')
+var parse = require('loose-json')
 var low = require('lowdb')
 var db = low('home-assistant.json')
 
@@ -13,11 +14,11 @@ var key = args[0]
 var value = args[1]
 
 if ('undefined' === typeof key || !key) {
-  // credit to yargs <https://github.com/yargs/yargs>
+  // Credit to yargs <https://github.com/yargs/yargs>
   var $0 = process.argv
     .slice(0, 2)
     .map(function (x, i) {
-      // ignore the node bin, specify this in your
+      // Ignore the node bin, specify this in your
       // bin file with #!/usr/bin/env node
       if (i === 0 && /\b(node|iojs)(\.exe)?$/.test(x)) return
       var b = path.relative(process.cwd(), x)
@@ -38,10 +39,20 @@ if ('undefined' === typeof key || !key) {
 var result
 
 if ('undefined' === typeof value) {
-  // read from db
+  // Read from db
   result = db.get(key).value()
 } else {
-  // write to db
+  // Write to db
+  try {
+    var json = parse(value.replace(/: (True|False)[,}]/g, function(match) {
+      return match.toLowerCase()
+    }))
+
+    value = json
+  } catch (ex) {
+    // It was not parsable JSON
+  }
+
   result = db.set(key, value).value()
 }
 
